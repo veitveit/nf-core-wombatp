@@ -1,0 +1,152 @@
+name: param2sdrf
+
+description: Mapping of parameters to run workflows with sdrf headers, including default values
+
+parameters:
+- name: fixed_mods
+  type: ontology
+  sdrf: modification parameters
+  default: NT=Carbamidomethyl;TA=C;MT=fixed;AC=UNIMOD:4
+
+- name: variable_mods
+  type: ontology
+  sdrf: modification parameters
+  default: NT=oxidation;MT=variable;TA=M;AC=UNIMOD:35
+
+- name: precursor_mass_tolerance
+  type: float
+  sdrf: precursor mass tolerance
+  default: 30
+
+- name: precursor_mass_tolerance_unit
+  type: class
+  sdrf: precursor mass tolerance
+  default: ppm
+  combine: true
+
+- name: fragment_mass_tolerance
+  type: float
+  sdrf: fragment mass tolerance
+  default: 0.05
+
+- name: fragment_mass_tolerance_unit
+  type: class
+  sdrf: fragment mass tolerance
+  default: 0.05
+  combine: true
+
+- name: enzyme
+  type: ontology
+  sdrf: cleavage agent details
+  default: NT=Trypsin;AC=MS:1001251
+
+#- name: type_cleavage
+#  type: class
+#  sdrf: type of cleavage
+#  default: 
+
+- name: fions
+  type: class
+  sdrf: forward ions
+  default: b
+
+- name: rions
+  type: class
+  sdrf: reverse ions
+  default: y
+
+- name: isotope_error_range
+  type: integer
+  sdrf: isotope error range
+  default: 0
+
+- name: add_decoys
+  type: boolean
+  sdrf: add decoys
+  default: true
+
+- name: num_hits
+  type: integer
+  sdrf: num peptide hits
+  default: 1
+
+- name: miscleavages
+  type: integer
+  sdrf: allowed miscleavages
+  default: 1
+
+- name: min_precursor_charge
+  type: integer
+  sdrf: minimum precursor charge
+  default: 2
+
+- name: max_precursor_charge
+  type: integer
+  sdrf: maximum precursor charge
+  default: 3
+
+- name: min_peptide_length
+  type: integer
+  sdrf: minimum peptide length
+  default: 8
+
+- name: max_peptide_length
+  type: integer
+  sdrf: maximum peptide length
+  default: 12
+
+- name: max_mods
+  type: integer
+  sdrf: maximum allowed modification
+  default: 4
+
+- name: fdr_psm
+  type: float
+  sdrf: fdr on psm level
+  default: 0.01
+
+- name: fdr_peptide
+  type: float
+  sdrf: fdr on peptide level
+  default: 0.01
+
+- name: fdr_protein
+  type: float
+  sdrf: fdr on protein level
+  default: 0.01
+
+#- name: match_between_runs_rt_tol
+#- type: float
+#- sdrf: retention time tolerance match between runs
+#- default: TODO
+
+#- name: match_between_runs_mz_tol
+#- type: float
+#- sdrf: m over z tolerance match between runs
+#- default: TODO
+
+- name: match_between_runs
+  type: boolean
+  sdrf: run match between runs
+  default: true
+
+- name: protein_inference
+- type: class
+- sdrf: protein inference method
+- default: unique
+
+- name: quantification_method
+- type: class
+- sdrf: quantification method
+- default: intensity
+
+
+#summarization_proteins: summarization of proteins method
+#min_num_peptides: minimum number of peptides per protein
+#summarization_psms: summarization of psms method
+#quant_transformation: transformation of quantitative values
+#normalization_method: normalization method
+#run_statistics:
+# run statistical tests
+#fdr_method: method for correction of multiple testing
+#fdr_threshold: threshold for statistical test fdr
