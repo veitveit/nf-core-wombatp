@@ -7,38 +7,28 @@ parameters:
   type: ontology
   sdrf: modification parameters
   default: NT=Carbamidomethyl;TA=C;MT=fixed;AC=UNIMOD:4
+  comment: only as unimod names with residue(s) separate via comma
 
 - name: variable_mods
   type: ontology
   sdrf: modification parameters
   default: NT=oxidation;MT=variable;TA=M;AC=UNIMOD:35
+  comment: only as unimod names with residue(s)
 
 - name: precursor_mass_tolerance
-  type: float
+  type: string
   sdrf: precursor mass tolerance
-  default: 30
-
-- name: precursor_mass_tolerance_unit
-  type: class
-  sdrf: precursor mass tolerance
-  default: ppm
-  combine: true
+  default: 30 ppm
 
 - name: fragment_mass_tolerance
-  type: float
+  type: string
   sdrf: fragment mass tolerance
-  default: 0.05
-
-- name: fragment_mass_tolerance_unit
-  type: class
-  sdrf: fragment mass tolerance
-  default: 0.05
-  combine: true
+  default: 0.05 Da
 
 - name: enzyme
   type: ontology
   sdrf: cleavage agent details
-  default: NT=Trypsin;AC=MS:1001251
+  default: Trypsin
 
 #- name: type_cleavage
 #  type: class
@@ -49,11 +39,24 @@ parameters:
   type: class
   sdrf: forward ions
   default: b
+  value:
+     - a
+     - a1
+     - b
+     - c
+     - c1
+     - a1
 
 - name: rions
   type: class
   sdrf: reverse ions
   default: y
+  value:
+     - x
+     - y
+     - z
+     - z1
+     - z2
 
 - name: isotope_error_range
   type: integer
@@ -131,22 +134,90 @@ parameters:
   default: true
 
 - name: protein_inference
-- type: class
-- sdrf: protein inference method
-- default: unique
+  type: class
+  sdrf: protein inference method
+  default: unique
+  value:
+    - unique
+    - shared
+    - parsimony
+    - other
 
 - name: quantification_method
-- type: class
-- sdrf: quantification method
-- default: intensity
+  type: class
+  sdrf: quantification method
+  default: intensity
+  value:
+    - precursor
+    - ms2
+    - labelled
+    - other
+
+- name: summarization_proteins
+  type: class
+  sdrf: summarization of proteins method
+  default: sum_abs
+  value:
+   - sum_abs
+   - mean
+   - median
+   - other
+  comment: sum_abs is the only one on non-transformed data
+
+- name: min_num_peptides
+  type: integer
+  sdrf: minimum number of peptides per protein
+  default: 2
+
+- name: summarization_psms
+  type: class
+  sdrf: summarization of psms method
+  default: sum_abs
+  value:
+    - sum_abs
+    - mean
+    - median
+    - other
 
 
-#summarization_proteins: summarization of proteins method
-#min_num_peptides: minimum number of peptides per protein
-#summarization_psms: summarization of psms method
-#quant_transformation: transformation of quantitative values
-#normalization_method: normalization method
-#run_statistics:
-# run statistical tests
-#fdr_method: method for correction of multiple testing
-#fdr_threshold: threshold for statistical test fdr
+- name: quant_transformation
+  type: class
+  sdrf: transformation of quantitative values
+  default: log
+  value:
+    - log
+    - rlog
+    - none
+    - other
+
+- name: normalization_method
+  type: class
+  sdrf: normalization method
+  default: median
+  value:
+    - mean
+    - median
+    - quantile
+    - linear
+    - non-linear
+    - other
+
+- name: run_statistics
+  type: boolean
+  sdrf: run statistical tests
+  default: true
+
+- name: fdr_method
+  type: class
+  sdrf: method for correction of multiple testing
+  default: benjamini-hochberg
+  value:
+    - benjamini-hochberg
+    - bonferroni
+    - qvalue
+    - other
+
+- name: fdr_threshold
+  type: float
+  sdrf: threshold for statistical test fdr
+  default: 0.01
